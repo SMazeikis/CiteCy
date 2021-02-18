@@ -21,6 +21,14 @@ import { defineComponent } from 'vue';
 import firebase from "firebase";
 
 export default defineComponent({
+  name: 'ActualHome',
+  components: {
+    // IonContent,
+    // IonHeader,
+    IonPage,
+    // IonTitle,
+    // IonToolbar
+  },
   data() {
     return {
       user: null
@@ -37,9 +45,10 @@ export default defineComponent({
   },
   methods: {
     logOut() {
+      console.log(this.user)
       firebase.auth().signOut().then(() => {
         firebase.auth().onAuthStateChanged(() => {
-          this.$router.push('/login')
+          this.$router.push('/LogIn')
         })
       })
     }

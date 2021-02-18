@@ -39,6 +39,14 @@ import { defineComponent } from 'vue';
 import firebase from "firebase";
 
 export default defineComponent ({
+  name: 'SignUp',
+  components: {
+    // IonContent,
+    // IonHeader,
+    IonPage,
+    // IonTitle,
+    // IonToolbar
+  },
   data() {
     return {
       user: {

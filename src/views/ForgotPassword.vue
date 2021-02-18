@@ -21,6 +21,15 @@ import { defineComponent } from 'vue';
 import firebase from "firebase";
 
 export default defineComponent ({
+  name: 'ForgotPassword',
+  components: {
+    // IonContent,
+    // IonHeader,
+    // IonButton,
+    IonPage,
+    // IonTitle,
+    // IonToolbar
+  },
   data() {
     return {
       user: {   

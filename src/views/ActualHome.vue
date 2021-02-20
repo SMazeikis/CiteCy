@@ -2,8 +2,7 @@
     <ion-page>
         <div class="vue-tempalte">
             <h3>Welcome</h3>
-            <p>{{user.displayName}}</p>
-            <p>{{user.email}}</p>
+            <p>{{user}}</p>
             
             <button 
             type="submit" 
@@ -21,6 +20,7 @@ import { defineComponent } from 'vue';
 import firebase from "firebase";
 
 export default defineComponent({
+  name: 'ActualHome',
   data() {
     return {
       user: null
@@ -29,6 +29,7 @@ export default defineComponent({
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log("here")
         this.user = user;
       } else {
         this.user = null;

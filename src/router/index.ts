@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import SignUp from '../views/SignUp.vue';
-import LogIn from '../views/LogIn.vue';
+import SignIn from '../views/LogIn.vue';
 import ActualHome from '../views/ActualHome.vue';
 import ForgotPassword from '../views/ForgotPassword.vue';
 
@@ -18,13 +18,13 @@ const routes: Array<RouteRecordRaw> = [
     component: ActualHome
   },
   {
-    path: '/LogIn',
-    name: 'login',
-    component: LogIn
+    path: '/SignIn',
+    name: 'SignIn',
+    component: SignIn
   },
   {
     path: '/ForgotPassword',
-    name: 'forgot-password',
+    name: 'ForgotPassword',
     component: ForgotPassword
   },
   {

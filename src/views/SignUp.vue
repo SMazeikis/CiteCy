@@ -1,5 +1,12 @@
 <template>
     <ion-page>
+      <ion-header>
+      <ion-toolbar>
+        <ion-title>Sign Up</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card>
         <div class="vue-tempalte">
             <form @submit.prevent="userRegistration">
                 <h3>Sign Up</h3>
@@ -25,10 +32,13 @@
 
                 <p class="forgot-password text-right">
                     Already registered 
-                    <!-- <router-link :to="{name: 'login'}">sign in?</router-link> -->
+                    <router-link :to="{name: 'SignIn'}">sign in?</router-link>
                 </p>
             </form>
-        </div>
+        </div> 
+       
+      </ion-card>
+    </ion-content>
     </ion-page>
 </template>
 
@@ -39,6 +49,7 @@ import { defineComponent } from 'vue';
 import firebase from "firebase";
 
 export default defineComponent ({
+  name: 'SignUp',
   data() {
     return {
       user: {

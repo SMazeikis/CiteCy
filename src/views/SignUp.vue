@@ -77,7 +77,7 @@ export default defineComponent ({
             displayName: this.user.name
           })
           .then(() => {
-            this.$router.push('/ActualHome')
+            this.$router.push('/Home')
           });
       })
       .catch((error) => {

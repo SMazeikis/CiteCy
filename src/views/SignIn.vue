@@ -57,7 +57,7 @@ export default defineComponent({
         .signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(() => {
           console.log("jere")
-          this.$router.push({path: '/ActualHome'})
+          this.$router.push({path: '/Home'})
         })
         .catch((error) => {
           alert(error.message);

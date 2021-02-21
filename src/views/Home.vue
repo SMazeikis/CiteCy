@@ -1,42 +1,47 @@
 <template>
-    <ion-page>
-        <div class="vue-tempalte">
-            <h3>Welcome</h3>
-            <p>{{user}}</p>
-            
-            <button 
-            type="submit" 
-            class="btn btn-dark btn-lg btn-block"
-            @click="logOut()">
-                Log out
-            </button>
-        </div>
-    </ion-page>
+  <ion-page>
+      <h3>Welcome</h3>
+      <p>{{ user }}</p>
+
+      <ion-button
+        type="submit"
+        v-on:click="logOut()"
+      >
+        Log out
+      </ion-button>
+  </ion-page>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import firebase from "firebase";
 
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {
     // IonContent,
     // IonHeader,
     IonPage,
+    IonButton,
     // IonTitle,
     // IonToolbar
   },
   data() {
     return {
-      user: null
+      user: null,
     };
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log("here")
         this.user = user;
       } else {
         this.user = null;
@@ -45,13 +50,15 @@ export default defineComponent({
   },
   methods: {
     logOut() {
-      console.log(this.user)
-      firebase.auth().signOut().then(() => {
-        firebase.auth().onAuthStateChanged(() => {
-          this.$router.push('/SignIn')
-        })
-      })
-    }
-  }
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          firebase.auth().onAuthStateChanged(() => {
+            this.$router.push("/");
+          });
+        });
+    },
+  },
 });
 </script>

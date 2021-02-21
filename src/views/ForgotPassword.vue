@@ -1,56 +1,81 @@
 <template>
-    <ion-page>
-        <div class="vue-tempalte">
-            <form @submit.prevent="forgetPassword">
-                <h3>Forgot Password</h3>
+  <ion-page>
+    <ion-content>
+      <ion-card>
+          <form @submit.prevent="forgetPassword">
+            <h3>Forgot Password</h3>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control form-control-lg" v-model="user.email" />
-                </div>
+            
+              <ion-item>
+                <ion-input
+                  type="email"
+                  placeholder="Email"
+                  v-model="user.email"
+                />
+              </ion-item>
 
-                <button type="submit" class="btn btn-dark btn-lg btn-block">Reset password</button>
-            </form>
-        </div>
-    </ion-page>
+            <ion-button type="submit">Reset password</ion-button>
+
+            <p class="SignUp">
+              <router-link to="/">Back to Sign In</router-link>
+            </p>
+          </form>
+      </ion-card>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonCard,
+  IonInput,
+  IonItem,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import firebase from "firebase";
 
-export default defineComponent ({
-  name: 'ForgotPassword',
+export default defineComponent({
+  name: "ForgotPassword",
   components: {
-    // IonContent,
+    IonContent,
     // IonHeader,
-    // IonButton,
+    IonInput,
+    IonCard,
+    IonItem,
+    IonButton,
     IonPage,
     // IonTitle,
     // IonToolbar
   },
   data() {
     return {
-      user: {   
-        email: ''
-      }
+      user: {
+        email: "",
+      },
     };
   },
   methods: {
     forgetPassword() {
-        firebase
+      firebase
         .auth()
         .sendPasswordResetEmail(this.user.email)
         .then(() => {
-            alert('Check your registered email to reset the password!')
-            this.user = {   
-              email: ''
-            }
-        }).catch((error) => {
-          alert(error)
+          alert("Check your registered email to reset the password!");
+          this.user = {
+            email: "",
+          };
+          this.$router.push({ path: "/" });
         })
-    }
-  }
+        .catch((error) => {
+          alert(error);
+        });
+    },
+  },
 });
 </script>

@@ -1,39 +1,63 @@
 <template>
-    <ion-page>
-    <div class="vue-tempalte">
-        <form @submit.prevent=userLogin>
+  <ion-page>
+    <ion-content>
+      <ion-card>
+          <form @submit.prevent="userLogin">
             <h3>Sign In</h3>
 
-            <div class="form-group">
-                <label>Email address</label>
-                <input type="email" class="form-control form-control-lg" v-model="user.email" />
-            </div>
+            <ion-item>
+              <ion-input
+                type="email"
+                placeholder="email"
+                v-model="user.email"
+              />
+            </ion-item>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control form-control-lg" v-model="user.password" />
-            </div>
+            <ion-item>
+              <ion-input
+                type="password"
+                placeholder="password"
+                v-model="user.password"
+              />
+            </ion-item>
 
-            <ion-button type="submit" v-on:click.prevent class="btn btn-dark btn-lg btn-block">Sign In</ion-button>
+            <ion-button type="submit">Sign In </ion-button>
 
-            <p class="forgot-password text-right mt-2 mb-4">
-                <router-link to="/ForgotPassword">Forgot password ?</router-link>
+            <p>
+              <router-link to="/ForgotPassword">Forgot password?</router-link>
             </p>
-        </form>
-    </div>
-    </ion-page>
+            <p>
+              <router-link to="/SignUp">Sign Up instead?</router-link>
+            </p>
+          </form>
+      </ion-card>
+    </ion-content>
+  </ion-page>
 </template>
 
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonCard,
+  IonInput,
+  IonItem,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import firebase from "firebase";
 
 export default defineComponent({
-  name: 'SignIn',
+  name: "SignIn",
   components: {
-    // IonContent,
+    IonContent,
+    IonCard,
+    IonInput,
+    IonItem,
     // IonHeader,
     IonButton,
     IonPage,
@@ -42,28 +66,25 @@ export default defineComponent({
   },
   data() {
     return {
-      user: {   
-        email: '',
-        password: ''
-      }
+      user: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
     userLogin() {
-      console.log(this.user)
-      console.log("here")
-        firebase
+      firebase
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
         .then(() => {
-          console.log("jere")
-          this.$router.push({path: '/Home'})
+          this.$router.push({ path: "/Home" });
         })
         .catch((error) => {
           alert(error.message);
-          console.log(error)
+          console.log(error);
         });
-    }
-  }
+    },
+  },
 });
 </script>

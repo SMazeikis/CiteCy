@@ -1,89 +1,98 @@
 <template>
-    <ion-page>
-      <ion-header>
-      <ion-toolbar>
-        <ion-title>Sign Up</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-page>
     <ion-content>
       <ion-card>
-        <div class="vue-tempalte">
-            <form @submit.prevent="userRegistration">
-                <h3>Sign Up</h3>
+          <form @submit.prevent="userRegistration">
+            <h3>Sign Up</h3>
 
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control form-control-lg" v-model="user.name" />
-                </div>
+            <ion-item>
+              <ion-input type="text" v-model="user.name" placeholder="Name" />
+            </ion-item>
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control form-control-lg" v-model="user.email" />
-                </div>
+            <ion-item>
+              <ion-input
+                type="email"
+                v-model="user.email"
+                placeholder="Email"
+              />
+            </ion-item>
 
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control form-control-lg" v-model="user.password" />
-                </div>
+            <ion-item>
+              <ion-input
+                type="password"
+                v-model="user.password"
+                placeholder="Password"
+              />
+            </ion-item>
 
-                <button type="submit" class="btn btn-dark btn-lg btn-block">
-                Sign Up
-                </button>
+            <ion-button type="submit"> Sign Up </ion-button>
 
-                <p class="forgot-password text-right">
-                    Already registered 
-                    <router-link :to="{name: 'SignIn'}">sign in?</router-link>
-                </p>
-            </form>
-        </div> 
-       
+            <p>
+              Already registered
+              <router-link to="/">sign in?</router-link>
+            </p>
+          </form>
       </ion-card>
     </ion-content>
-    </ion-page>
+  </ion-page>
 </template>
 
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButton,
+  IonCard,
+  IonInput,
+  IonItem,
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 import firebase from "firebase";
 
-export default defineComponent ({
-  name: 'SignUp',
+export default defineComponent({
+  name: "SignUp",
   components: {
-    // IonContent,
+    IonContent,
     // IonHeader,
     IonPage,
     // IonTitle,
-    // IonToolbar
+    // IonToolbar,
+    IonButton,
+    IonCard,
+    IonInput,
+    IonItem,
   },
   data() {
     return {
       user: {
-        name: '',
-        email: '',
-        password: ''
-      }
+        name: "",
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
     userRegistration() {
       firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.user.email, this.user.password)
-      .then((res) => {
-        res.user
-          .updateProfile({
-            displayName: this.user.name
-          })
-          .then(() => {
-            this.$router.push('/Home')
-          });
-      })
-      .catch((error) => {
-         alert(error.message);
-      });
-    }
+        .auth()
+        .createUserWithEmailAndPassword(this.user.email, this.user.password)
+        .then((res) => {
+          res.user
+            .updateProfile({
+              displayName: this.user.name,
+            })
+            .then(() => {
+              this.$router.push("/Home");
+            });
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    },
   },
 });
 </script>

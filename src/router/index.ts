@@ -7,7 +7,7 @@ import ForgotPassword from '../views/ForgotPassword.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/SignUp',
     name: 'signUp',
     component: SignUp
   },
@@ -17,7 +17,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Home
   },
   {
-    path: '/SignIn',
+    path: '/',
     name: 'SignIn',
     component: SignIn
   },
